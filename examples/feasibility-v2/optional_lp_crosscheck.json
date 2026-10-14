@@ -1,0 +1,58 @@
+[
+  {
+    "seed": 20001,
+    "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "demand": 35117,
+    "optimistic_perfect_information_fractional_fulfilled": 33293.04900662252,
+    "optimistic_fill_ceiling": 0.9480607400012108,
+    "required_fulfilled_for_95": 33362,
+    "units_short_of_95": 68.95099337748252,
+    "dual_upper_bound_units": 33293.04900662252,
+    "primal_dual_gap_units": 0.0,
+    "worst_constraint_violation": 3.637978807091713e-12,
+    "mathematically_infeasible_under_relaxation": true,
+    "solver_seconds": 0.5119410700008302
+  },
+  {
+    "seed": 20007,
+    "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "demand": 30676,
+    "optimistic_perfect_information_fractional_fulfilled": 28727.795421229603,
+    "optimistic_fill_ceiling": 0.936490918673543,
+    "required_fulfilled_for_95": 29143,
+    "units_short_of_95": 415.20457877039735,
+    "dual_upper_bound_units": 28727.795421229603,
+    "primal_dual_gap_units": 0.0,
+    "worst_constraint_violation": 3.637978807091713e-12,
+    "mathematically_infeasible_under_relaxation": true,
+    "solver_seconds": 0.31650070500108995
+  },
+  {
+    "seed": 20016,
+    "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "demand": 33501,
+    "optimistic_perfect_information_fractional_fulfilled": 31517.074493927124,
+    "optimistic_fill_ceiling": 0.940780110860187,
+    "required_fulfilled_for_95": 31826,
+    "units_short_of_95": 308.9255060728756,
+    "dual_upper_bound_units": 31517.074493927128,
+    "primal_dual_gap_units": 3.637978807091713e-12,
+    "worst_constraint_violation": 3.637978807091713e-12,
+    "mathematically_infeasible_under_relaxation": true,
+    "solver_seconds": 0.34778413899948646
+  },
+  {
+    "seed": 20023,
+    "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+    "demand": 32693,
+    "optimistic_perfect_information_fractional_fulfilled": 30347.618128409566,
+    "optimistic_fill_ceiling": 0.9282604266481989,
+    "required_fulfilled_for_95": 31059,
+    "units_short_of_95": 711.3818715904345,
+    "dual_upper_bound_units": 30347.618128409573,
+    "primal_dual_gap_units": 7.275957614183426e-12,
+    "worst_constraint_violation": 3.637978807091713e-12,
+    "mathematically_infeasible_under_relaxation": true,
+    "solver_seconds": 0.3082820769996033
+  }
+]

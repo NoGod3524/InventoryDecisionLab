@@ -18,6 +18,12 @@ The new [v2 results](examples/ablation-v2/RESULTS.md) and [offline report](examp
 
 These are conditional simulator findings. Shared starting assets and purchasing caps do not imply equal realized inventory capital; [the report](examples/ablation-v2/report.html) shows the service/capital trade-off and complete development grid. The five primary fill contrasts use 99% marginal percentile-bootstrap intervals as an approximate Bonferroni nominal 95% family; other contrasts are descriptive. See [exact reproduction and freeze checks](docs/ablation_v2.md).
 
+## Why the unchanged configuration cannot reach 27/30
+
+A subsequent [exact-integer capacity certificate](docs/feasibility_v2.md) proves that **four of the original 30 development paths cannot reach 95% fill under the unchanged operating constraints**, even with free order fees, advance access to early cash, perfect allocation and free final-arrival demand. Their optimistic fill ceilings are 94.806%, 93.646%, 94.078% and 92.824%. Thus the original sample can pass at most **26/30**, regardless of forecast or allocator.
+
+The [complete 30-path bounds and SKU certificates](examples/feasibility-v2/) are reproducible using the standard library. This post-hoc diagnosis changes no v2 evidence. A uniform review-day allowance of **at least $18,062.47** is necessary even to remove the easiest of those four certificates; it is an optimistic lower bound, **not a sufficient or recommended budget**. A relaxed-budget study must be labeled separately.
+
 ## Start with the decision, not the demo
 
 **The preserved v1 held-out result is “do not deploy the base configuration.”** Separate 20-seed policy selection found no policy meeting the predeclared gate (95% fill in at least 90% of seeds). The frozen decision was evaluated against 30 new seeds and 12 predefined sensitivity scenarios. Seasonal buffering averages 95.92% base fill but reaches 95% in only 70% of held-out seeds.
