@@ -1,0 +1,54 @@
+{
+  "completed_budgets_cents": [
+    1800000,
+    1810000,
+    1820000,
+    1830000,
+    1840000,
+    1850000,
+    1860000,
+    1870000,
+    1880000,
+    1890000,
+    1900000,
+    1910000,
+    1920000,
+    1930000,
+    1940000
+  ],
+  "confirmation_paths_generated": 0,
+  "latest_budget_cents": 1940000,
+  "latest_cohort_passes": [
+    {
+      "cohort": "former_v2_evaluation_A",
+      "passing_count": 30,
+      "policy": "rolling_base_stock_z329"
+    },
+    {
+      "cohort": "former_v2_evaluation_A",
+      "passing_count": 30,
+      "policy": "seasonal_base_stock_z329"
+    },
+    {
+      "cohort": "former_v2_evaluation_B",
+      "passing_count": 28,
+      "policy": "rolling_base_stock_z329"
+    },
+    {
+      "cohort": "former_v2_evaluation_B",
+      "passing_count": 28,
+      "policy": "seasonal_base_stock_z329"
+    },
+    {
+      "cohort": "original_v2_development",
+      "passing_count": 27,
+      "policy": "rolling_base_stock_z329"
+    },
+    {
+      "cohort": "original_v2_development",
+      "passing_count": 27,
+      "policy": "seasonal_base_stock_z329"
+    }
+  ],
+  "selected_policy": "seasonal_base_stock_z329"
+}
