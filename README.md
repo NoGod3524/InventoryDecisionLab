@@ -4,19 +4,29 @@
 
 > Which replenishment policy meets an agreed service level at the lowest modeled operating cost, and when do cash and supplier constraints make that target infeasible?
 
-Compare three original, transparent implementations across the **same demand paths**. Explore a self-contained HTML report, inspect every movement in SQLite/CSV, and reproduce the results without API keys, accounts, data downloads, or third-party Python packages.
+Compare transparent replenishment rules across the **same demand paths**: the preserved v1 has three policies, and the v2 extension adds seven fixed specifications for strong-baseline and component-ablation analysis. Explore a self-contained HTML report, inspect every movement in SQLite/CSV, and reproduce the results without API keys, accounts, data downloads, or third-party Python packages.
 
 **All published results are simulated. This is an auditable business-analytics research project, not a production ordering system or evidence of real retailer savings.**
 
+## v2: strong baselines and component ablation
+
+The new [v2 results](examples/ablation-v2/RESULTS.md) and [offline report](examples/ablation-v2/report.html) separate the weekday forecast from its safety buffer using a 2×2 design, and give rolling and weekday policies the same development calibration opportunity. The [plan](ablation_plan_v2.json) and [calibration](examples/ablation-v2-development/frozen_calibration.json) were separately committed before evaluating 60 new seeds. All v1 evidence below is preserved.
+
+- Adding the same 1.28 buffer to rolling mean improves mean fill by **4.664 percentage points**. With that buffer held fixed, weekday forecasts add **0.110 points** (99% paired interval +0.047 to +0.168).
+- After equal-opportunity calibration, weekday versus ordinary periodic base-stock differs by **+0.012 points**, with a 99% interval of **−0.049 to +0.073**. This does not establish superiority or equivalence.
+- Neither calibrated family met the development feasibility gate: both topped out at **26/30**, short of 27/30. Their frozen z=3.29 diagnostic fallbacks subsequently passed in only **45/60** evaluation seeds, short of 54/60. **Both deployment choices remain null.**
+
+These are conditional simulator findings. Shared starting assets and purchasing caps do not imply equal realized inventory capital; [the report](examples/ablation-v2/report.html) shows the service/capital trade-off and complete development grid. The five primary fill contrasts use 99% marginal percentile-bootstrap intervals as an approximate Bonferroni nominal 95% family; other contrasts are descriptive. See [exact reproduction and freeze checks](docs/ablation_v2.md).
+
 ## Start with the decision, not the demo
 
-**The rigorous result is “do not deploy the base configuration.”** Separate 20-seed policy selection found no policy meeting the predeclared gate (95% fill in at least 90% of seeds). The frozen decision was evaluated against 30 new seeds and 12 predefined sensitivity scenarios. Seasonal buffering averages 95.92% base fill but reaches 95% in only 70% of held-out seeds.
+**The preserved v1 held-out result is “do not deploy the base configuration.”** Separate 20-seed policy selection found no policy meeting the predeclared gate (95% fill in at least 90% of seeds). The frozen decision was evaluated against 30 new seeds and 12 predefined sensitivity scenarios. Seasonal buffering averages 95.92% base fill but reaches 95% in only 70% of held-out seeds.
 
 A $24,000 procurement allowance or a 3-day review schedule is a promising **predefined sensitivity finding**, not a new independently validated deployment choice. The real UCI-sales replay also challenges transferability: the gross replay reaches 85.98%, and an audit-driven exact-cancellation diagnostic reaches 86.06%; neither supports deployment. The large canceled training order makes the gross replay a data-quality challenge, not external validation.
 
 ### Reviewer routes
 
-- **3 minutes:** read [competition brief](docs/competition_brief.md), open [held-out report](examples/robustness/report.html), then inspect [gross UCI replay](examples/uci-replay/report.html) alongside the [matched-cancellation diagnostic](examples/uci-matched/report.html).
+- **3 minutes:** start with [v2 ablation results](examples/ablation-v2/RESULTS.md), then read the preserved v1 [competition brief](docs/competition_brief.md), open [held-out report](examples/robustness/report.html), then inspect [gross UCI replay](examples/uci-replay/report.html) alongside the [matched-cancellation diagnostic](examples/uci-matched/report.html).
 - **15 minutes:** run the tests, inspect [experiment plan](examples/robustness/experiment_plan.json), [frozen selection](examples/robustness/frozen_selection.json), [paired comparison CSV](examples/robustness/paired_comparisons.csv), and [methodology](docs/methodology.md).
 - **Deep reproduction:** rerun the 20+30-seed experiment and official-workbook replay using the commands below. Compare configuration, source and CSV hashes. No paid service or API key is needed.
 

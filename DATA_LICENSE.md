@@ -1,6 +1,6 @@
 # Generated data license
 
-Self-authored synthetic data produced by this project's generator, specifically the CSV files under examples/base, examples/stress, and examples/robustness, is dedicated to the public domain under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). The [CC0 legal code](https://creativecommons.org/publicdomain/zero/1.0/legalcode) applies to those generated data files.
+Self-authored synthetic data produced by this project's generator, specifically the CSV files under examples/base, examples/stress, examples/robustness, examples/ablation-v2-development, and examples/ablation-v2, is dedicated to the public domain under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). The [CC0 legal code](https://creativecommons.org/publicdomain/zero/1.0/legalcode) applies to those generated data files.
 
 Those synthetic files contain no real records. Code and documentation use MIT. The raw upstream workbook is not distributed; the separately attributed public-data derivatives below have their own license.
 

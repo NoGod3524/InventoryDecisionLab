@@ -26,13 +26,28 @@ python -m inventory_lab.ablation evaluate \
   --plan ablation_plan_v2.json \
   --plan-commit 72906cc5cd47fb2eb623660660b624af2a02cbe5 \
   --calibration output/ablation-v2-development/frozen_calibration.json \
-  --calibration-commit ACTUAL_40_CHARACTER_CALIBRATION_COMMIT \
+  --calibration-commit 82f0e03937a5c9ccdbd50f37cd0648493154b80c \
   --output output/ablation-v2
 ```
 
 The runner refuses a nonempty output directory, overlapping seed splits, changed plan bytes, changed development CSVs, changed calculation sources, or an out-of-grid frozen multiplier. Changing calculation source requires preserving the prior freeze and publishing a corrected freeze before evaluation. Deliberate tuning after evaluation needs a new plan and fresh seeds, not an overwrite or silent rerun.
 
 `source_code_sha256` includes the core simulator, existing SQL aggregation wrapper, v2 experiment code and report renderer. `sql_sha256` identifies the exact metric query. Full per-seed metrics and demand/catalog fingerprints allow deterministic reconstruction without committing large full-run ledgers. `representative_ledger.csv` retains the first seven days of the first evaluation seed for each distinct mechanism; every simulated ledger, including omitted days, is checked for accounting, cash, initial endowment, pipeline and receipt timing. A calibrated alias may share the representative mechanism's policy label.
+
+## Reproduce the already-frozen evidence directly
+
+Reviewers do not need to publish new commits or repeat development calibration to reproduce these exact results. From the repository root (including the custom ZIP), use the committed calibration and actual two freeze references:
+
+```sh
+python -m inventory_lab.ablation evaluate \
+  --plan ablation_plan_v2.json \
+  --plan-commit 72906cc5cd47fb2eb623660660b624af2a02cbe5 \
+  --calibration examples/ablation-v2-development/frozen_calibration.json \
+  --calibration-commit 82f0e03937a5c9ccdbd50f37cd0648493154b80c \
+  --output output/ablation-v2-reproduced
+```
+
+Compare the newly generated CSV/report bytes with `examples/ablation-v2/`. This is deterministic reproduction of already-observed evidence, not another independent validation. New choices, scenarios or tuning require a new prospectively frozen protocol.
 
 ## Read the outputs
 

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": {
+    "all_csv_plan_freeze_source_hashes": true,
+    "all_420_metrics_and_seven_summaries": true,
+    "26_paired_point_estimates_and_five_primary_bootstraps": true,
+    "independent_development_abstention_and_fallback": true,
+    "all_policies_and_failure_labels_in_report": true
+  },
+  "policy_seed_rows": 420,
+  "paired_rows": 26,
+  "source_code_unchanged": true
+}

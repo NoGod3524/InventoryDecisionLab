@@ -1,0 +1,336 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inventory Decision Lab · Baselines and ablation v2</title><style>
+*{box-sizing:border-box}body{margin:0;background:#eef3f2;color:#18333d;font:16px/1.55 system-ui}header{background:#18333d;color:#fff;padding:42px max(24px,calc((100vw - 1240px)/2))}h1{font-size:clamp(30px,4vw,48px);line-height:1.12;margin:12px 0}header p{max-width:980px;color:#d7e8e5}main{max-width:1320px;padding:24px;margin:auto}section{background:white;border:1px solid #d7e2df;border-radius:12px;padding:24px;margin:24px 0}h2{margin-top:0}a{color:#156d69}.notice{background:#fff0c7;border-left:4px solid #b78521;padding:20px}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:11px 8px;border-bottom:1px solid #dce6e2;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{background:#f3f7f5}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:450px;overflow:auto;font-size:12px}svg{width:100%;height:auto}.legend{columns:2;font-size:13px}.sub{font-size:13px;color:#4e6870}summary{cursor:pointer}nav{display:flex;gap:15px;flex-wrap:wrap}@media(max-width:650px){main{padding:12px}section{padding:16px}.legend{columns:1}}</style><header><div>INVENTORY DECISION LAB / V2 EVIDENCE</div><h1>What does the buffer buy?</h1><p>30 development seeds; 60 separate held-out seeds; seven fixed policy specifications. The common empirical gate is fill ≥95% in ≥90% of seeds. The 2×2 holds the buffer at either 0 or 1.28 while changing only rolling versus weekday forecasts. The two calibrated arms receive the same development grid and selection opportunity. No held-out winner is selected.</p></header><main><div class="notice"><strong>Synthetic evidence. Frozen development choices.</strong><ul><li>rolling_mean: no development candidate passed the frozen gate; z=3.29 is only an infeasible diagnostic fallback.</li><li>weekday: no development candidate passed the frozen gate; z=3.29 is only an infeasible diagnostic fallback.</li><li>Calibrated Base Stock: 45/60 evaluation seeds passed, below the frozen empirical requirement of 54/60.</li><li>Calibrated Seasonal: 45/60 evaluation seeds passed, below the frozen empirical requirement of 54/60.</li></ul></div><section><h2>Main results</h2><ul><li>weekday_without_buffer: mean fill difference +0.329 percentage points; 99% interval [+0.264, +0.394] excludes zero under the declared approximate conditional procedure.</li><li>weekday_with_buffer: mean fill difference +0.110 percentage points; 99% interval [+0.047, +0.168] excludes zero under the declared approximate conditional procedure.</li><li>buffer_with_rolling: mean fill difference +4.664 percentage points; 99% interval [+4.000, +5.269] excludes zero under the declared approximate conditional procedure.</li><li>buffer_with_weekday: mean fill difference +4.445 percentage points; 99% interval [+3.765, +5.072] excludes zero under the declared approximate conditional procedure.</li><li>calibrated_forecast_comparison: mean fill difference +0.012 percentage points; 99% interval [-0.049, +0.073] contains zero. This does not establish equivalence.</li></ul></section><section><h2>Service and realized inventory capital</h2><svg viewBox="0 0 900 365" role="img" aria-label="Mean fill versus mean inventory position value"><path d="M80 35V315H830" fill="none" stroke="#82939a"/><path d="M80 58.50H830" stroke="#b08030" stroke-dasharray="5 4"/><text x="18" y="50">100%</text><text x="38" y="320">0%</text><text x="80" y="346">$0</text><text x="710" y="346">$35,919.92</text><circle cx="440.34" cy="77.95" r="6" fill="#708090"><title>Fixed Periodic: 87.80%; $17,976.94</title></circle><text x="449.34" y="69.95" font-size="11">1</text><circle cx="479.21" cy="69.09" r="6" fill="#247c9b"><title>Rolling No Buffer: 91.08%; $19,916.05</title></circle><text x="488.21" y="79.09" font-size="11">2</text><circle cx="564.75" cy="56.49" r="6" fill="#bd7a1d"><title>Rolling Buffer: 95.74%; $24,183.75</title></circle><text x="573.75" y="48.49" font-size="11">3</text><circle cx="483.25" cy="68.20" r="6" fill="#7553a8"><title>Seasonal No Buffer: 91.41%; $20,117.85</title></circle><text x="492.25" y="78.20" font-size="11">4</text><circle cx="568.68" cy="56.19" r="6" fill="#147d60"><title>Seasonal Buffer: 95.85%; $24,379.41</title></circle><text x="577.68" y="48.19" font-size="11">5</text><circle cx="701.87" cy="52.39" r="6" fill="#b44c55"><title>Calibrated Base Stock: 97.26%; $31,024.28</title></circle><text x="710.87" y="62.39" font-size="11">6</text><circle cx="706.09" cy="52.36" r="6" fill="#3b546b"><title>Calibrated Seasonal: 97.27%; $31,234.71</title></circle><text x="715.09" y="44.36" font-size="11">7</text></svg><ol class="legend"><li>Fixed Periodic</li><li>Rolling No Buffer</li><li>Rolling Buffer</li><li>Seasonal No Buffer</li><li>Seasonal Buffer</li><li>Calibrated Base Stock</li><li>Calibrated Seasonal</li></ol><p class="sub">Points are means across the same held-out seeds. The dashed line is the service target. Shared cash caps are not matched realized capital; the plotted trade-off is descriptive.</p></section><section><h2>Frozen calibration</h2><div class="scroll"><table><thead><tr><th>Family</th><th>Frozen z</th><th>Development status</th></tr></thead><tbody><tr><td>rolling_mean</td><td>3.29</td><td>INFEASIBLE: diagnostic fallback only</td></tr><tr><td>weekday</td><td>3.29</td><td>INFEASIBLE: diagnostic fallback only</td></tr></tbody></table></div></section><section><h2>Held-out service and cost</h2><div class="scroll"><table><thead><tr><th>Policy</th><th>z</th><th>Mean fill</th><th>Fill range</th><th>Passes</th><th>95% Wilson interval</th><th>Mean modeled cost</th><th>Mean capital</th></tr></thead><tbody><tr><td>Fixed Periodic</td><td>0.00</td><td>87.80%</td><td>78.69% – 89.74%</td><td>0/60</td><td>0.00% – 6.02%</td><td>$37,281.05</td><td>$17,976.94</td></tr><tr><td>Rolling No Buffer</td><td>0.00</td><td>91.08%</td><td>78.49% – 92.87%</td><td>0/60</td><td>0.00% – 6.02%</td><td>$28,041.25</td><td>$19,916.05</td></tr><tr><td>Rolling Buffer</td><td>1.28</td><td>95.74%</td><td>79.60% – 98.70%</td><td>41/60</td><td>55.77% – 78.69%</td><td>$15,189.95</td><td>$24,183.75</td></tr><tr><td>Seasonal No Buffer</td><td>0.00</td><td>91.41%</td><td>78.55% – 93.27%</td><td>0/60</td><td>0.00% – 6.02%</td><td>$27,111.70</td><td>$20,117.85</td></tr><tr><td>Seasonal Buffer</td><td>1.28</td><td>95.85%</td><td>79.63% – 98.80%</td><td>41/60</td><td>55.77% – 78.69%</td><td>$14,890.10</td><td>$24,379.41</td></tr><tr><td>Calibrated Base Stock</td><td>3.29</td><td>97.26%</td><td>80.31% – 100.00%</td><td>45/60</td><td>62.77% – 84.22%</td><td>$11,352.67</td><td>$31,024.28</td></tr><tr><td>Calibrated Seasonal</td><td>3.29</td><td>97.27%</td><td>79.93% – 100.00%</td><td>45/60</td><td>62.77% – 84.22%</td><td>$11,339.81</td><td>$31,234.71</td></tr></tbody></table></div></section><section><h2>Primary paired fill contrasts</h2><div class="scroll"><table><thead><tr><th>Primary fill contrast (candidate − baseline)</th><th>Mean Δ (pp)</th><th>95% interval (pp)</th><th>99% family interval (pp)</th><th>Valid / undefined</th></tr></thead><tbody><tr><td>Seasonal No Buffer − Rolling No Buffer</td><td>0.329</td><td>0.280 to 0.379</td><td>0.264 to 0.394</td><td>60 / 0</td></tr><tr><td>Seasonal Buffer − Rolling Buffer</td><td>0.110</td><td>0.063 to 0.154</td><td>0.047 to 0.168</td><td>60 / 0</td></tr><tr><td>Rolling Buffer − Rolling No Buffer</td><td>4.664</td><td>4.173 to 5.131</td><td>4.000 to 5.269</td><td>60 / 0</td></tr><tr><td>Seasonal Buffer − Seasonal No Buffer</td><td>4.445</td><td>3.941 to 4.918</td><td>3.765 to 5.072</td><td>60 / 0</td></tr><tr><td>Calibrated Seasonal − Calibrated Base Stock</td><td>0.012</td><td>-0.034 to 0.059</td><td>-0.049 to 0.073</td><td>60 / 0</td></tr></tbody></table></div></section><section><h2>Inventory capital and cost components</h2><div class="scroll"><table><thead><tr><th>Policy</th><th>Initial stock</th><th>Mean capital</th><th>Mean peak capital</th><th>Terminal on hand</th><th>Terminal pipeline</th><th>Procurement</th><th>Holding</th><th>Order fees</th><th>Shortage</th></tr></thead><tbody><tr><td>Fixed Periodic</td><td>$24,420.93</td><td>$17,976.94</td><td>$24,420.93</td><td>$5,025.73</td><td>$10,916.92</td><td>$376,308.84</td><td>$666.33</td><td>$1,541.12</td><td>$35,073.60</td></tr><tr><td>Rolling No Buffer</td><td>$24,420.93</td><td>$19,916.05</td><td>$28,544.88</td><td>$7,432.92</td><td>$11,624.51</td><td>$393,157.93</td><td>$797.59</td><td>$1,499.17</td><td>$25,744.50</td></tr><tr><td>Rolling Buffer</td><td>$24,420.93</td><td>$24,183.75</td><td>$33,334.67</td><td>$10,861.58</td><td>$12,035.11</td><td>$416,732.32</td><td>$1,122.96</td><td>$1,435.33</td><td>$12,631.65</td></tr><tr><td>Seasonal No Buffer</td><td>$24,420.93</td><td>$20,117.85</td><td>$28,781.61</td><td>$7,485.56</td><td>$11,787.70</td><td>$394,720.69</td><td>$809.52</td><td>$1,499.83</td><td>$24,802.35</td></tr><tr><td>Seasonal Buffer</td><td>$24,420.93</td><td>$24,379.41</td><td>$33,545.55</td><td>$11,012.12</td><td>$12,130.41</td><td>$417,435.85</td><td>$1,137.75</td><td>$1,434.79</td><td>$12,317.55</td></tr><tr><td>Calibrated Base Stock</td><td>$24,420.93</td><td>$31,024.28</td><td>$40,855.84</td><td>$17,064.46</td><td>$11,983.89</td><td>$429,413.28</td><td>$1,705.76</td><td>$1,339.46</td><td>$8,307.45</td></tr><tr><td>Calibrated Seasonal</td><td>$24,420.93</td><td>$31,234.71</td><td>$41,064.18</td><td>$17,143.89</td><td>$12,088.26</td><td>$429,678.60</td><td>$1,723.75</td><td>$1,336.96</td><td>$8,279.10</td></tr></tbody></table></div></section><section><h2>Complete development grid</h2><div class="scroll"><table><thead><tr><th>Family</th><th>z</th><th>Dev passes</th><th>Mean fill</th><th>Mean modeled cost</th><th>Mean capital</th></tr></thead><tbody><tr><td>rolling_mean</td><td>0.00</td><td>0/30</td><td>91.23%</td><td>$26,958.10</td><td>$19,158.69</td></tr><tr><td>rolling_mean</td><td>0.64</td><td>22/30</td><td>94.42%</td><td>$18,274.00</td><td>$21,252.13</td></tr><tr><td>rolling_mean</td><td>1.28</td><td>25/30</td><td>96.27%</td><td>$13,300.49</td><td>$23,381.00</td></tr><tr><td>rolling_mean</td><td>1.96</td><td>26/30</td><td>97.21%</td><td>$10,872.16</td><td>$25,718.07</td></tr><tr><td>rolling_mean</td><td>2.58</td><td>26/30</td><td>97.60%</td><td>$9,953.83</td><td>$27,858.66</td></tr><tr><td>rolling_mean</td><td>3.29</td><td>26/30</td><td>97.88%</td><td>$9,338.84</td><td>$30,319.75</td></tr><tr><td>weekday</td><td>0.00</td><td>0/30</td><td>91.45%</td><td>$26,355.95</td><td>$19,307.11</td></tr><tr><td>weekday</td><td>0.64</td><td>22/30</td><td>94.57%</td><td>$17,866.68</td><td>$21,404.03</td></tr><tr><td>weekday</td><td>1.28</td><td>25/30</td><td>96.35%</td><td>$13,109.11</td><td>$23,539.64</td></tr><tr><td>weekday</td><td>1.96</td><td>26/30</td><td>97.29%</td><td>$10,643.27</td><td>$25,873.29</td></tr><tr><td>weekday</td><td>2.58</td><td>26/30</td><td>97.65%</td><td>$9,825.45</td><td>$28,016.51</td></tr><tr><td>weekday</td><td>3.29</td><td>26/30</td><td>97.90%</td><td>$9,300.34</td><td>$30,484.95</td></tr></tbody></table></div></section><section><h2>Secondary descriptive contrasts</h2><div class="scroll"><table><thead><tr><th>Contrast</th><th>Metric</th><th>Mean Δ</th><th>95% interval</th><th>Pairs</th></tr></thead><tbody><tr><td>weekday_without_buffer</td><td>modeled_cost_dollars</td><td>-929.5507</td><td>-1,071.6827 to -785.9267</td><td>60</td></tr><tr><td>weekday_without_buffer</td><td>purchase_dollars</td><td>1,562.7608</td><td>1,344.5400 to 1,799.9960</td><td>60</td></tr><tr><td>weekday_without_buffer</td><td>mean_inventory_position_value_dollars</td><td>201.8049</td><td>176.6390 to 227.4404</td><td>60</td></tr><tr><td>weekday_without_buffer</td><td>peak_inventory_position_value_dollars</td><td>236.7343</td><td>172.4613 to 308.0093</td><td>60</td></tr><tr><td>weekday_with_buffer</td><td>modeled_cost_dollars</td><td>-299.8513</td><td>-429.4697 to -161.2463</td><td>60</td></tr><tr><td>weekday_with_buffer</td><td>purchase_dollars</td><td>703.5317</td><td>589.0665 to 818.7202</td><td>60</td></tr><tr><td>weekday_with_buffer</td><td>mean_inventory_position_value_dollars</td><td>195.6660</td><td>167.9308 to 224.1387</td><td>60</td></tr><tr><td>weekday_with_buffer</td><td>peak_inventory_position_value_dollars</td><td>210.8787</td><td>130.3918 to 287.0792</td><td>60</td></tr><tr><td>buffer_with_rolling</td><td>modeled_cost_dollars</td><td>-12,851.3042</td><td>-14,075.8362 to -11,566.5554</td><td>60</td></tr><tr><td>buffer_with_rolling</td><td>purchase_dollars</td><td>23,574.3840</td><td>21,645.0770 to 25,390.4843</td><td>60</td></tr><tr><td>buffer_with_rolling</td><td>mean_inventory_position_value_dollars</td><td>4,267.6972</td><td>4,165.3844 to 4,367.4285</td><td>60</td></tr><tr><td>buffer_with_rolling</td><td>peak_inventory_position_value_dollars</td><td>4,789.7968</td><td>4,625.7695 to 4,952.3802</td><td>60</td></tr><tr><td>buffer_with_weekday</td><td>modeled_cost_dollars</td><td>-12,221.6048</td><td>-13,469.2838 to -10,902.7366</td><td>60</td></tr><tr><td>buffer_with_weekday</td><td>purchase_dollars</td><td>22,715.1548</td><td>20,760.9600 to 24,547.0740</td><td>60</td></tr><tr><td>buffer_with_weekday</td><td>mean_inventory_position_value_dollars</td><td>4,261.5584</td><td>4,150.7496 to 4,369.4778</td><td>60</td></tr><tr><td>buffer_with_weekday</td><td>peak_inventory_position_value_dollars</td><td>4,763.9412</td><td>4,602.6810 to 4,922.4888</td><td>60</td></tr><tr><td>calibrated_forecast_comparison</td><td>modeled_cost_dollars</td><td>-12.8583</td><td>-153.4418 to 127.9838</td><td>60</td></tr><tr><td>calibrated_forecast_comparison</td><td>purchase_dollars</td><td>265.3157</td><td>211.2520 to 321.9717</td><td>60</td></tr><tr><td>calibrated_forecast_comparison</td><td>mean_inventory_position_value_dollars</td><td>210.4348</td><td>181.0096 to 239.9117</td><td>60</td></tr><tr><td>calibrated_forecast_comparison</td><td>peak_inventory_position_value_dollars</td><td>208.3392</td><td>152.2603 to 263.0145</td><td>60</td></tr><tr><td>factorial_interaction</td><td>fill_rate</td><td>-0.0022</td><td>-0.0028 to -0.0016</td><td>60</td></tr></tbody></table></div></section><section><h2>Scope and interpretation</h2><p>The experiment is a prospective extension of an already-explored synthetic model, not an original preregistration. All inference is conditional on this generator, deterministic lead times, full latent-demand visibility, endowed initial stock and the stated cash allocator. Raw-demand dispersion is a shared heuristic, not calibrated forecast-error uncertainty. Same starting assets and cash caps do not mean equal realized capital or equal achieved service; compare the capital and service columns together. Modeled operating cost is holding + fees + assumed shortage penalty, excluding acquisition spend, revenue and terminal salvage. Five 99% marginal percentile-bootstrap intervals form an approximate Bonferroni nominal 95% primary family; coverage is not guaranteed. Secondary contrasts are descriptive, with no multiplicity adjustment. A confidence interval containing zero does not prove equivalence. Wilson intervals describe passing fractions and do not replace the prespecified empirical gate. Undefined fill never passes; paired undefined metrics are excluded only from that contrast and counted. No real-world savings, causal business effect, competition ranking, or deployment approval is established.</p></section><section><h2>Provenance and reproducibility</h2><pre>Plan commit: 72906cc5cd47fb2eb623660660b624af2a02cbe5
+Calibration commit: 82f0e03937a5c9ccdbd50f37cd0648493154b80c
+Plan SHA-256: d4d606b086f583264dc7adae630860a1583ace4fafa0aea9001badfb45489c0b
+Calibration SHA-256: d99f7bd0de51c9f8d7fea142cd37a5e14828fa045b92dd4ae69dee22cb99bcf1</pre><nav><a href="evaluation_metrics.csv">evaluation_metrics.csv</a><a href="evaluation_summary.csv">evaluation_summary.csv</a><a href="paired_comparisons.csv">paired_comparisons.csv</a><a href="development_metrics.csv">development_metrics.csv</a><a href="development_summary.csv">development_summary.csv</a><a href="frozen_calibration.json">frozen_calibration.json</a><a href="ablation_plan_v2.json">ablation_plan_v2.json</a><a href="representative_ledger.csv">representative_ledger.csv</a><a href="manifest.json">manifest.json</a><a href="RESULTS.md">RESULTS.md</a></nav><details><summary>Full verified local manifest</summary><pre>{
+  &quot;schema_version&quot;: &quot;inventory-ablation-results/2.0&quot;,
+  &quot;plan_sha256&quot;: &quot;d4d606b086f583264dc7adae630860a1583ace4fafa0aea9001badfb45489c0b&quot;,
+  &quot;remote_plan_commit&quot;: &quot;72906cc5cd47fb2eb623660660b624af2a02cbe5&quot;,
+  &quot;remote_calibration_commit&quot;: &quot;82f0e03937a5c9ccdbd50f37cd0648493154b80c&quot;,
+  &quot;source_code_sha256&quot;: {
+    &quot;inventory_lab/core.py&quot;: &quot;6f21d6145ac2119b122c08ee21c36f0655a8d4986e7cc3925098258bb28ec7a2&quot;,
+    &quot;inventory_lab/experiments.py&quot;: &quot;67a9f9fed37ceda8e57bf658dc67ba777a7180ea9a26e6eb0ad1406e03b10ee5&quot;,
+    &quot;inventory_lab/ablation.py&quot;: &quot;90271c4558ceb1743d611cf17f5d320ab2bf06494a9feba4c1fcb6ab8c1b4ac6&quot;,
+    &quot;inventory_lab/ablation_report.py&quot;: &quot;b702d44a26dcc56a26910ddf6a44361eaf88e8f1216438a496da2269c9c9ff65&quot;,
+    &quot;sql/policy_comparison.sql&quot;: &quot;ce07245c6e9436daaa3f647cad9147becfe7c52988c370d2ad3f13e2cdd4af6b&quot;
+  },
+  &quot;sql_sha256&quot;: &quot;ce07245c6e9436daaa3f647cad9147becfe7c52988c370d2ad3f13e2cdd4af6b&quot;,
+  &quot;frozen_calibration_sha256&quot;: &quot;d99f7bd0de51c9f8d7fea142cd37a5e14828fa045b92dd4ae69dee22cb99bcf1&quot;,
+  &quot;policies&quot;: [
+    {
+      &quot;id&quot;: &quot;fixed_periodic&quot;,
+      &quot;predictor&quot;: &quot;frozen_mean&quot;,
+      &quot;z&quot;: 0,
+      &quot;role&quot;: &quot;legacy&quot;
+    },
+    {
+      &quot;id&quot;: &quot;rolling_no_buffer&quot;,
+      &quot;predictor&quot;: &quot;rolling_mean&quot;,
+      &quot;z&quot;: 0,
+      &quot;role&quot;: &quot;factorial&quot;
+    },
+    {
+      &quot;id&quot;: &quot;rolling_buffer&quot;,
+      &quot;predictor&quot;: &quot;rolling_mean&quot;,
+      &quot;z&quot;: 1.28,
+      &quot;role&quot;: &quot;factorial&quot;
+    },
+    {
+      &quot;id&quot;: &quot;seasonal_no_buffer&quot;,
+      &quot;predictor&quot;: &quot;weekday&quot;,
+      &quot;z&quot;: 0,
+      &quot;role&quot;: &quot;factorial&quot;
+    },
+    {
+      &quot;id&quot;: &quot;seasonal_buffer&quot;,
+      &quot;predictor&quot;: &quot;weekday&quot;,
+      &quot;z&quot;: 1.28,
+      &quot;role&quot;: &quot;factorial&quot;
+    },
+    {
+      &quot;id&quot;: &quot;calibrated_base_stock&quot;,
+      &quot;predictor&quot;: &quot;rolling_mean&quot;,
+      &quot;z&quot;: 3.29,
+      &quot;role&quot;: &quot;strong_baseline&quot;,
+      &quot;calibration_status&quot;: &quot;diagnostic_fallback_not_feasible&quot;
+    },
+    {
+      &quot;id&quot;: &quot;calibrated_seasonal&quot;,
+      &quot;predictor&quot;: &quot;weekday&quot;,
+      &quot;z&quot;: 3.29,
+      &quot;role&quot;: &quot;equal_opportunity_calibrated_candidate&quot;,
+      &quot;calibration_status&quot;: &quot;diagnostic_fallback_not_feasible&quot;
+    }
+  ],
+  &quot;input_sha256_by_seed&quot;: [
+    {
+      &quot;seed&quot;: 30000,
+      &quot;input_sha256&quot;: &quot;ea5afd6d7cbab43a80dda38eb9e32689efb2f37cb95abfe755fecbc0d0a9b562&quot;
+    },
+    {
+      &quot;seed&quot;: 30001,
+      &quot;input_sha256&quot;: &quot;4bb980c3aea49619081445ccfc6f1041127aebfa7be6fee06f4e69ed5efdf51e&quot;
+    },
+    {
+      &quot;seed&quot;: 30002,
+      &quot;input_sha256&quot;: &quot;439f045629e1e851b09eeb759f5d361d9df13bd165c9b8168033009fbd2ca7fd&quot;
+    },
+    {
+      &quot;seed&quot;: 30003,
+      &quot;input_sha256&quot;: &quot;010f61f3e1f7a1f60e0ce98ba38feab48fcfe25edad044a05e9ec696e7f317f9&quot;
+    },
+    {
+      &quot;seed&quot;: 30004,
+      &quot;input_sha256&quot;: &quot;7c5920dba6dc83b6798f2073a316d453f9b8650d39d7f04bbe7abc941a4d3956&quot;
+    },
+    {
+      &quot;seed&quot;: 30005,
+      &quot;input_sha256&quot;: &quot;ff587b76ce360afd3a8a89c64ff45ac9c0a4dc4d307e85fec2137720f69f2ec3&quot;
+    },
+    {
+      &quot;seed&quot;: 30006,
+      &quot;input_sha256&quot;: &quot;4455670823fd5a315b870a951addfeb9aee31718ed31beafef4804157ebcf826&quot;
+    },
+    {
+      &quot;seed&quot;: 30007,
+      &quot;input_sha256&quot;: &quot;ebb41462f9d4866e26321a1bb4979e6bb18ff30a57a49ee9fed2b0633affb1ba&quot;
+    },
+    {
+      &quot;seed&quot;: 30008,
+      &quot;input_sha256&quot;: &quot;919a4424f1736e02fd66033ec4180cdc660f8b62e048798c8984c3b613a5f419&quot;
+    },
+    {
+      &quot;seed&quot;: 30009,
+      &quot;input_sha256&quot;: &quot;8b0defcf45ea7794c9faed4e9153c2ea56163ae7e95f24bc7bab94c5bc8ef990&quot;
+    },
+    {
+      &quot;seed&quot;: 30010,
+      &quot;input_sha256&quot;: &quot;98f295a8be99eb4eba873cf33a32f893e78fb7de049e41a088191ea0d27f81e2&quot;
+    },
+    {
+      &quot;seed&quot;: 30011,
+      &quot;input_sha256&quot;: &quot;a6c5f23348b7cca5a32e14e71634afdb78dbdb20858346ecc00366e9d27775e9&quot;
+    },
+    {
+      &quot;seed&quot;: 30012,
+      &quot;input_sha256&quot;: &quot;033b44163a772f9d2fe2487971fcccdd11dc6477bd3c4b932593a270089a7949&quot;
+    },
+    {
+      &quot;seed&quot;: 30013,
+      &quot;input_sha256&quot;: &quot;37223cffeb1bafbeebc12d9b9a5b8dd61d70782ed858f982ec118b0af1d25097&quot;
+    },
+    {
+      &quot;seed&quot;: 30014,
+      &quot;input_sha256&quot;: &quot;f6155526728cbb29b17986d84fbac969b6a9475f21965f749b0488401564b725&quot;
+    },
+    {
+      &quot;seed&quot;: 30015,
+      &quot;input_sha256&quot;: &quot;246c9dc07d6f63780453bc5e1b4cef399fcd00796aada16af6d0937c8fc52ada&quot;
+    },
+    {
+      &quot;seed&quot;: 30016,
+      &quot;input_sha256&quot;: &quot;18be1379ef31ee40b19287bfc2c652662858ccb2a714ea161502cbb39a40ca83&quot;
+    },
+    {
+      &quot;seed&quot;: 30017,
+      &quot;input_sha256&quot;: &quot;7ab20be6ba0fd2a0a2253d099c73f95cdc86ef93f893c2184c883b872865a4f8&quot;
+    },
+    {
+      &quot;seed&quot;: 30018,
+      &quot;input_sha256&quot;: &quot;7902eb842bc7a6e9b6ee737543a8c455bcdac4d4de18492caaf8711dd6613e8c&quot;
+    },
+    {
+      &quot;seed&quot;: 30019,
+      &quot;input_sha256&quot;: &quot;f33c418fedbcd46ef410a8836bab85a7125528c4ed1096f42ca2f001066a12a4&quot;
+    },
+    {
+      &quot;seed&quot;: 30020,
+      &quot;input_sha256&quot;: &quot;d6ae4127dc2a9a8c43fc6bedeffa76ebce90cc40f28a0d5c21e9dec4c5ea2c8c&quot;
+    },
+    {
+      &quot;seed&quot;: 30021,
+      &quot;input_sha256&quot;: &quot;8ec35367435bbe69ab0100017baef50b5cf5516f2bab4c5619008f1d6bd26d92&quot;
+    },
+    {
+      &quot;seed&quot;: 30022,
+      &quot;input_sha256&quot;: &quot;4664a2a421f6a53162b0292ad38efc36e3058c6db45dbaf8381cf0e7f6320c17&quot;
+    },
+    {
+      &quot;seed&quot;: 30023,
+      &quot;input_sha256&quot;: &quot;67be87b004b6ad7efb819f98695fe5d27345d9140ee1b25f966c5badc713807a&quot;
+    },
+    {
+      &quot;seed&quot;: 30024,
+      &quot;input_sha256&quot;: &quot;1bc51f27d9fdc747f2653897f5913957456f396ef85c145b1c8d646d88f497eb&quot;
+    },
+    {
+      &quot;seed&quot;: 30025,
+      &quot;input_sha256&quot;: &quot;522156857fd1ec0ca3028903130a92bc00f8525dc4baec24906422ab64c1badc&quot;
+    },
+    {
+      &quot;seed&quot;: 30026,
+      &quot;input_sha256&quot;: &quot;93f5724fce28cc9ee48d54e76907d0c2aebf753c6da03aa9d4020c89e8a0bdc5&quot;
+    },
+    {
+      &quot;seed&quot;: 30027,
+      &quot;input_sha256&quot;: &quot;843448b4d5c499850c58641dfb2dcd090b5a20217789415fdf3b7320b4e5b755&quot;
+    },
+    {
+      &quot;seed&quot;: 30028,
+      &quot;input_sha256&quot;: &quot;601211d2ebf46b1b48693c51c95d015a025f05f666e58f895d4dd9e4bc61a2f5&quot;
+    },
+    {
+      &quot;seed&quot;: 30029,
+      &quot;input_sha256&quot;: &quot;9d64ae6da04fd41275b8f0aec4156b09759e11349e8e27306332293d2d6ccfd7&quot;
+    },
+    {
+      &quot;seed&quot;: 30030,
+      &quot;input_sha256&quot;: &quot;5f2f4ecc4e4abe112c0523510accbae083843da66ea6a6427462c451a5559949&quot;
+    },
+    {
+      &quot;seed&quot;: 30031,
+      &quot;input_sha256&quot;: &quot;5d15481e156b9682f8457e276d37779e2457d1ec6e4157f677be847d72a321f3&quot;
+    },
+    {
+      &quot;seed&quot;: 30032,
+      &quot;input_sha256&quot;: &quot;6708d0cc0a20bde063601d9b9c86a5249e1c5fb2c62233c5e8b49593cfaa9275&quot;
+    },
+    {
+      &quot;seed&quot;: 30033,
+      &quot;input_sha256&quot;: &quot;fd73304ecc8bf216f6ec580f26886d6992b9ef59f9817a76f1728dc35a2b7053&quot;
+    },
+    {
+      &quot;seed&quot;: 30034,
+      &quot;input_sha256&quot;: &quot;5a05ff4f2204f20bb5eef24aa3ce9d374dc5c4c6d21209dda519bd8bffd71f56&quot;
+    },
+    {
+      &quot;seed&quot;: 30035,
+      &quot;input_sha256&quot;: &quot;523b755ea02afa9aff4838fb4a832df2fcc6a1c05b6cd56a33c2387d7ad59127&quot;
+    },
+    {
+      &quot;seed&quot;: 30036,
+      &quot;input_sha256&quot;: &quot;9a88c31ae6ad6f52df02e1b2e4b7757b33f7bb1168d2aa57d2daf8ee5a791fa5&quot;
+    },
+    {
+      &quot;seed&quot;: 30037,
+      &quot;input_sha256&quot;: &quot;37c05813449dc50662861c2dc65896d253ba32d4baa4c0bd158da98f0ff2087c&quot;
+    },
+    {
+      &quot;seed&quot;: 30038,
+      &quot;input_sha256&quot;: &quot;0440940775ada9678bd5389c427d18d0ab9c57882d9bca19b8890efc555c3174&quot;
+    },
+    {
+      &quot;seed&quot;: 30039,
+      &quot;input_sha256&quot;: &quot;fa454c1c2315dbcfefe59fc8518da061784d7902d012aba77dcfb6f674223393&quot;
+    },
+    {
+      &quot;seed&quot;: 30040,
+      &quot;input_sha256&quot;: &quot;678882bfe6ef220bd03e2d0b4d3e77a82d3839c8ba3ac70ff5abb463b8357ea6&quot;
+    },
+    {
+      &quot;seed&quot;: 30041,
+      &quot;input_sha256&quot;: &quot;8ff318ba3916ebac3a5c666c01516d6dac3a6ef9265f0015495ddd7f14a19006&quot;
+    },
+    {
+      &quot;seed&quot;: 30042,
+      &quot;input_sha256&quot;: &quot;29189b6d54fe166484074912c37ea622ef18da94c12b8528a42ddc0919fe911a&quot;
+    },
+    {
+      &quot;seed&quot;: 30043,
+      &quot;input_sha256&quot;: &quot;e88185b29ab8dfec52e8c4686e5f6a48fa62f79328c9614b89477d4b04940bd5&quot;
+    },
+    {
+      &quot;seed&quot;: 30044,
+      &quot;input_sha256&quot;: &quot;154f35dac058b2d8f8ef87d556c1e604157f1849fe3bd5f5b8cffb7d8e511e9e&quot;
+    },
+    {
+      &quot;seed&quot;: 30045,
+      &quot;input_sha256&quot;: &quot;08709fe339690c33ef7495e223bac41eea954d2dda5bb8aa752cdd743698c815&quot;
+    },
+    {
+      &quot;seed&quot;: 30046,
+      &quot;input_sha256&quot;: &quot;865889f561bbdff4cc559a3f5cc5c558a13ddb32bfbc1e3534bbadfae6f2e0e6&quot;
+    },
+    {
+      &quot;seed&quot;: 30047,
+      &quot;input_sha256&quot;: &quot;fad11dee4fb79c2da087e4655a61b4c106c6fb72fce07aa59f34aab223e3c7a3&quot;
+    },
+    {
+      &quot;seed&quot;: 30048,
+      &quot;input_sha256&quot;: &quot;e617077d007a99403e8dbcf7e841f45668669b3f47dafba83dd7bebc4bb201ad&quot;
+    },
+    {
+      &quot;seed&quot;: 30049,
+      &quot;input_sha256&quot;: &quot;fa53317c317536ed2aebcad61769e21573247cfa5c95b1bcaec547181b7f06fb&quot;
+    },
+    {
+      &quot;seed&quot;: 30050,
+      &quot;input_sha256&quot;: &quot;23dd0d0be3c87e84861b076282978153c0ca30ab6cd57bb131879c8a1f2c6030&quot;
+    },
+    {
+      &quot;seed&quot;: 30051,
+      &quot;input_sha256&quot;: &quot;0d7fbf00826bcc3a103dff9d570b666e5dc6cb41cae7603329f93ea67ea91ea1&quot;
+    },
+    {
+      &quot;seed&quot;: 30052,
+      &quot;input_sha256&quot;: &quot;e5f03468dd9b6d335a0db4df43c996e56e4ea3fcd22fa8f7488b81ea413f2ac9&quot;
+    },
+    {
+      &quot;seed&quot;: 30053,
+      &quot;input_sha256&quot;: &quot;1e00c245d32796f1ba3867d41eaf20fd73640bbd7a8cc34a32709920b15855f2&quot;
+    },
+    {
+      &quot;seed&quot;: 30054,
+      &quot;input_sha256&quot;: &quot;dd81bb1f6c3a7e5d73a783cf604b283a6ca43e11c904fafdc1ac1d5498bcf7a5&quot;
+    },
+    {
+      &quot;seed&quot;: 30055,
+      &quot;input_sha256&quot;: &quot;5feb03f18df3a03a606cb86d91b015421b4d3f4146b6a0b0349f5ae89470d44e&quot;
+    },
+    {
+      &quot;seed&quot;: 30056,
+      &quot;input_sha256&quot;: &quot;47dff5d1a8a1438c28b1afabe3420f64d8e728e77569cec2f2c0a430369b13c4&quot;
+    },
+    {
+      &quot;seed&quot;: 30057,
+      &quot;input_sha256&quot;: &quot;3b7b618eb7a02251acd309878358e166bea3b07444325ea0b50bce95e0244c89&quot;
+    },
+    {
+      &quot;seed&quot;: 30058,
+      &quot;input_sha256&quot;: &quot;2302def9a4e95ab689fb231b598cd4a1b31620113c06f3f861142bb9a50ac3ed&quot;
+    },
+    {
+      &quot;seed&quot;: 30059,
+      &quot;input_sha256&quot;: &quot;e9912f129a72ec3c6b1950accadb793605ad27d54c7c7b03d8a80e37a0ebe5c6&quot;
+    }
+  ],
+  &quot;csv_sha256&quot;: {
+    &quot;development_metrics.csv&quot;: &quot;063365bd60e01605229fc2aa30c3934ce418c7f0ba3d911b189c0ce08adc5444&quot;,
+    &quot;development_summary.csv&quot;: &quot;b13bdf74889a42cc32b68576e0873de5d81ad667164282c112487cd789a136f8&quot;,
+    &quot;evaluation_metrics.csv&quot;: &quot;cd6a36f3564724670b8f7ebe1639dbc1b25e3900780168e76dc70b0b58c1bfe8&quot;,
+    &quot;evaluation_summary.csv&quot;: &quot;f94fcce755f1d2f3bb499faae716e738ef229586b992ad40f03d4db9d186e56b&quot;,
+    &quot;paired_comparisons.csv&quot;: &quot;8b3e7fab58370ed8c248b9fc2af5c46f5d449d4a9e8d7c07a9dc5dddb7b9f20e&quot;,
+    &quot;representative_ledger.csv&quot;: &quot;0eb795ff9fe288504d08f0521fde7e0beed7dcd727dd87dc6b5f6b2eca32697b&quot;
+  },
+  &quot;validation_results&quot;: {
+    &quot;accounting_audits_passed&quot;: 420,
+    &quot;reported_policy_seed_rows&quot;: 420,
+    &quot;representative_ledger_rows&quot;: 1176,
+    &quot;checked_identities&quot;: [
+      &quot;inventory_balance&quot;,
+      &quot;demand_fulfillment_loss&quot;,
+      &quot;initial_endowment&quot;,
+      &quot;receipt_timing&quot;,
+      &quot;pipeline_conservation&quot;,
+      &quot;purchases&quot;,
+      &quot;fees&quot;,
+      &quot;holding&quot;,
+      &quot;shortage&quot;,
+      &quot;daily_cash&quot;
+    ],
+    &quot;shared_initial_state_and_demand_checked&quot;: true,
+    &quot;plan_and_calibration_hashes_verified&quot;: true,
+    &quot;calculation_source_unchanged_since_development&quot;: true
+  },
+  &quot;provenance_note&quot;: &quot;Remote references are supplied after external GitHub verification; offline runner verifies local frozen hashes, not remote chronology.&quot;
+}</pre></details></section></main></html>

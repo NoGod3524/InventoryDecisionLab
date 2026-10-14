@@ -6,7 +6,7 @@ from zipfile import ZipFile,ZipInfo,ZIP_DEFLATED
 
 root=Path(__file__).resolve().parent.parent
 allowed_roots={'.github','inventory_lab','sql','tests','docs','examples','scripts'}
-allowed_files={'README.md','CONTRIBUTING.md','DATA_LICENSE.md','LICENSE','VERSION','requirements.txt','.gitignore','index.html'}
+allowed_files={'README.md','CONTRIBUTING.md','DATA_LICENSE.md','LICENSE','VERSION','requirements.txt','.gitignore','index.html','ablation_plan_v2.json'}
 files=[]
 for p in root.rglob('*'):
     if not p.is_file():continue

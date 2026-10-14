@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "root_plan_packaged": true,
+  "byte_identical_outputs": [
+    "RESULTS.md",
+    "ablation_plan_v2.json",
+    "development_metrics.csv",
+    "development_summary.csv",
+    "evaluation_metrics.csv",
+    "evaluation_summary.csv",
+    "frozen_calibration.json",
+    "manifest.json",
+    "paired_comparisons.csv",
+    "report.html",
+    "representative_ledger.csv"
+  ],
+  "comparison_count": 11,
+  "archived_source_sha_verified_by_runner": true,
+  "interpretation": "Deterministic reproduction of the same already-evaluated seeds, not new independent evidence.",
+  "tested_archive_sha256": "971decbf90dce84cb4618c45d49b38bb8241a0da74c9df7ba12f2ee288d07a30",
+  "archive_scope": "Archive assembled before this validation record was added; all 11 computational outputs were reproduced byte-for-byte."
+}
