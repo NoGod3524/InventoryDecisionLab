@@ -1,0 +1,39 @@
+name: Verified release
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'VERSION'
+      - '.github/workflows/release.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Test source and report controls
+        run: |
+          python3 -m unittest discover -s tests -v
+          node tests/report_smoke.js
+          node tests/evidence_smoke.js
+          python3 -m compileall -q inventory_lab
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Publish immutable version reference
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          VERSION=$(cat VERSION)
+          case "$VERSION" in v[0-9]*.[0-9]*.[0-9]*) ;; *) echo 'Invalid version'; exit 1;; esac
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo 'Version already exists; refusing to replace it.'
+            exit 1
+          fi
+          gh release create "$VERSION" --target "$GITHUB_SHA" --title "InventoryDecisionLab $VERSION" --notes-file docs/release_notes.md

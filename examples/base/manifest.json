@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "data": "self-authored synthetic; not observed business outcomes",
+  "configs": [
+    {
+      "seed": 7,
+      "skus": 24,
+      "days": 180,
+      "warmup": 56,
+      "lead_days": 4,
+      "review_days": 7,
+      "daily_budget_cents": 1800000,
+      "order_fee_cents": 250,
+      "holding_bps": 5,
+      "shortage_cents": 900,
+      "demand_scale": 1,
+      "service_target": 0.95
+    },
+    {
+      "seed": 17,
+      "skus": 24,
+      "days": 180,
+      "warmup": 56,
+      "lead_days": 4,
+      "review_days": 7,
+      "daily_budget_cents": 1800000,
+      "order_fee_cents": 250,
+      "holding_bps": 5,
+      "shortage_cents": 900,
+      "demand_scale": 1,
+      "service_target": 0.95
+    },
+    {
+      "seed": 27,
+      "skus": 24,
+      "days": 180,
+      "warmup": 56,
+      "lead_days": 4,
+      "review_days": 7,
+      "daily_budget_cents": 1800000,
+      "order_fee_cents": 250,
+      "holding_bps": 5,
+      "shortage_cents": 900,
+      "demand_scale": 1,
+      "service_target": 0.95
+    },
+    {
+      "seed": 37,
+      "skus": 24,
+      "days": 180,
+      "warmup": 56,
+      "lead_days": 4,
+      "review_days": 7,
+      "daily_budget_cents": 1800000,
+      "order_fee_cents": 250,
+      "holding_bps": 5,
+      "shortage_cents": 900,
+      "demand_scale": 1,
+      "service_target": 0.95
+    },
+    {
+      "seed": 47,
+      "skus": 24,
+      "days": 180,
+      "warmup": 56,
+      "lead_days": 4,
+      "review_days": 7,
+      "daily_budget_cents": 1800000,
+      "order_fee_cents": 250,
+      "holding_bps": 5,
+      "shortage_cents": 900,
+      "demand_scale": 1,
+      "service_target": 0.95
+    }
+  ],
+  "inputs": [
+    {
+      "seed": 7,
+      "input_sha256": "971dfc0f7299b5ae02365968c38807ca451716e74ebeee788dcc66d212a71278"
+    },
+    {
+      "seed": 17,
+      "input_sha256": "93ab8baf3c20e53546f68767b86c491d99f53f3e29d6ea597ceee6e09130f233"
+    },
+    {
+      "seed": 27,
+      "input_sha256": "cc6e41f4adc666a99c13950d1c8fa5ac570324c46762dfb46c7e971f943b18ab"
+    },
+    {
+      "seed": 37,
+      "input_sha256": "b13c83f34245bb4e05816effad0a0a95433de7787de11112d1b988f4cf37e174"
+    },
+    {
+      "seed": 47,
+      "input_sha256": "7424d9c5047c910676d9a14b893651f58bd0d39e69d8d5baf73cfbb2f119e74b"
+    }
+  ],
+  "audit": {
+    "inventory_balance_errors": 0,
+    "negative_cash_rows": 0,
+    "budget_violation_days": 0,
+    "foreign_key_errors": 0
+  },
+  "artifacts": {
+    "policy_comparison.csv": "a19556f1f9538c7731f29cff6e65475889fd0e76e2b086a1113e749392206a3c",
+    "daily_ledger.csv": "8891f493294d84469cfba045f3130ba01e3f67868bf413ebcaf35394cd2611c9",
+    "catalog.csv": "6bfb2e013a967d3abfd4dfbd109e955442856c0da43519cdd7131da9c2cc0368",
+    "demand.csv": "d45066cde53b477eac44211dceec55997c8828f72c32ea00fff5607303091f7b"
+  }
+}

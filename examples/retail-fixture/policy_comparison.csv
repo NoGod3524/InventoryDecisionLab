@@ -1,0 +1,4 @@
+seed,policy,demand_units,fulfilled_units,fill_rate,stockout_sku_days,mean_units_per_sku,orders,purchase_gbp,holding_gbp,order_gbp,shortage_gbp,modeled_cost_gbp,constrained_sku_reviews
+7,fixed_periodic,18,18,1.0,0,16.875,2,5.59,0.09966,5.0,0.0,5.09966,0
+7,rolling_mean,18,18,1.0,0,16.875,2,5.59,0.09966,5.0,0.0,5.09966,0
+7,seasonal_buffer,18,18,1.0,0,16.875,2,16.46,0.09966,5.0,0.0,5.09966,0
