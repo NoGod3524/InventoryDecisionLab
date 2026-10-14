@@ -1,0 +1,294 @@
+{
+  "schema_version": "inventory-ablation-plan/2.0",
+  "study": "Strong periodic base-stock baseline and forecast-buffer factorial ablation",
+  "status": "prospective extension of explored model; not original preregistration",
+  "required_execution_gates": [
+    "verify separate remote plan commit before evaluation path generation or inspection",
+    "publish frozen development calibration in separate remote commit before evaluation"
+  ],
+  "config": {
+    "skus": 24,
+    "days": 180,
+    "warmup": 56,
+    "lead_days": 4,
+    "review_days": 7,
+    "daily_budget_cents": 1800000,
+    "order_fee_cents": 250,
+    "holding_bps": 5,
+    "shortage_cents": 900,
+    "demand_scale": 1.0,
+    "service_target": 0.95
+  },
+  "scenarios": [
+    "base"
+  ],
+  "development_seeds": [
+    20000,
+    20001,
+    20002,
+    20003,
+    20004,
+    20005,
+    20006,
+    20007,
+    20008,
+    20009,
+    20010,
+    20011,
+    20012,
+    20013,
+    20014,
+    20015,
+    20016,
+    20017,
+    20018,
+    20019,
+    20020,
+    20021,
+    20022,
+    20023,
+    20024,
+    20025,
+    20026,
+    20027,
+    20028,
+    20029
+  ],
+  "evaluation_seeds": [
+    30000,
+    30001,
+    30002,
+    30003,
+    30004,
+    30005,
+    30006,
+    30007,
+    30008,
+    30009,
+    30010,
+    30011,
+    30012,
+    30013,
+    30014,
+    30015,
+    30016,
+    30017,
+    30018,
+    30019,
+    30020,
+    30021,
+    30022,
+    30023,
+    30024,
+    30025,
+    30026,
+    30027,
+    30028,
+    30029,
+    30030,
+    30031,
+    30032,
+    30033,
+    30034,
+    30035,
+    30036,
+    30037,
+    30038,
+    30039,
+    30040,
+    30041,
+    30042,
+    30043,
+    30044,
+    30045,
+    30046,
+    30047,
+    30048,
+    30049,
+    30050,
+    30051,
+    30052,
+    30053,
+    30054,
+    30055,
+    30056,
+    30057,
+    30058,
+    30059
+  ],
+  "forbidden_fresh_evidence": "All previously observed or published paths, including old selection seeds 100\u2013119 and evaluation seeds 1000\u20131029",
+  "estimator": {
+    "window_days": 28,
+    "dispersion": "population stddev of last 28 raw observed demands",
+    "protection": "sku lead_days + review_days - 1",
+    "buffer": "z * population_stddev * sqrt(protection)",
+    "rounding": "ceil(forecast + buffer)",
+    "weekday_indexing": "unchanged v1 core.estimate",
+    "initial_state": "identical original v1 training-mean endowment and empty pipeline",
+    "allocator": "unchanged v1 coverage/sku allocator"
+  },
+  "policies": [
+    {
+      "id": "fixed_periodic",
+      "predictor": "frozen_mean",
+      "z": 0,
+      "role": "legacy"
+    },
+    {
+      "id": "rolling_no_buffer",
+      "predictor": "rolling_mean",
+      "z": 0,
+      "role": "factorial"
+    },
+    {
+      "id": "rolling_buffer",
+      "predictor": "rolling_mean",
+      "z": 1.28,
+      "role": "factorial"
+    },
+    {
+      "id": "seasonal_no_buffer",
+      "predictor": "weekday",
+      "z": 0,
+      "role": "factorial"
+    },
+    {
+      "id": "seasonal_buffer",
+      "predictor": "weekday",
+      "z": 1.28,
+      "role": "factorial"
+    },
+    {
+      "id": "calibrated_base_stock",
+      "predictor": "rolling_mean",
+      "z": "development_frozen",
+      "role": "strong_baseline"
+    },
+    {
+      "id": "calibrated_seasonal",
+      "predictor": "weekday",
+      "z": "development_frozen",
+      "role": "equal_opportunity_calibrated_candidate"
+    }
+  ],
+  "calibration": {
+    "z_grid": [
+      0,
+      0.64,
+      1.28,
+      1.96,
+      2.58,
+      3.29
+    ],
+    "families": [
+      "rolling_mean",
+      "weekday"
+    ],
+    "service_fill_target": 0.95,
+    "required_passing_fraction": 0.9,
+    "required_passing_count": 27,
+    "undefined_fill_passes": false,
+    "feasible_lexicographic_min": [
+      "mean_modeled_cost",
+      "mean_inventory_position_value",
+      "z"
+    ],
+    "infeasible_deployment_choice": null,
+    "infeasible_diagnostic_lexicographic_min": [
+      "negative_passing_count",
+      "negative_mean_defined_fill",
+      "mean_modeled_cost",
+      "z"
+    ],
+    "all_undefined_mean_fill_ordering": "negative_infinity",
+    "report_infeasible_fallback": true,
+    "tuning_after_evaluation": false
+  },
+  "primary_fill_contrasts": [
+    {
+      "id": "weekday_without_buffer",
+      "candidate": "seasonal_no_buffer",
+      "baseline": "rolling_no_buffer"
+    },
+    {
+      "id": "weekday_with_buffer",
+      "candidate": "seasonal_buffer",
+      "baseline": "rolling_buffer"
+    },
+    {
+      "id": "buffer_with_rolling",
+      "candidate": "rolling_buffer",
+      "baseline": "rolling_no_buffer"
+    },
+    {
+      "id": "buffer_with_weekday",
+      "candidate": "seasonal_buffer",
+      "baseline": "seasonal_no_buffer"
+    },
+    {
+      "id": "calibrated_forecast_comparison",
+      "candidate": "calibrated_seasonal",
+      "baseline": "calibrated_base_stock"
+    }
+  ],
+  "secondary": {
+    "interaction_weights": {
+      "seasonal_buffer": 1,
+      "seasonal_no_buffer": -1,
+      "rolling_buffer": -1,
+      "rolling_no_buffer": 1
+    },
+    "metrics_for_primary_policy_pairs": [
+      "modeled_cost_dollars",
+      "purchase_dollars",
+      "mean_inventory_position_value_dollars",
+      "peak_inventory_position_value_dollars"
+    ],
+    "status": "descriptive, not multiplicity adjusted"
+  },
+  "uncertainty": {
+    "unit": "seed",
+    "paired": true,
+    "bootstrap_draws": 10000,
+    "bootstrap_rng_seed": 913,
+    "quantile_index": "floor(q * (draws - 1))",
+    "descriptive_level": 0.95,
+    "primary_fill_bonferroni_level": 0.99,
+    "primary_family_size": 5,
+    "coverage": "approximate conditional percentile bootstrap",
+    "undefined": "drop only paired undefined values; retain counts",
+    "passing_proportion_interval": "Wilson two-sided 95%, z=1.959963984540054",
+    "passing_interval_changes_selection_rule": false
+  },
+  "additional_metrics": [
+    "initial_inventory_value_dollars",
+    "mean_inventory_position_value_dollars",
+    "peak_inventory_position_value_dollars",
+    "terminal_inventory_value_dollars",
+    "terminal_pipeline_value_dollars"
+  ],
+  "capital_definition": "Sum over SKUs of (end-of-day on_hand + paid pipeline_units) * acquisition_cost; same starting assets/caps do not imply equal actual capital use",
+  "required_artifacts": [
+    "development_metrics.csv",
+    "development_summary.csv",
+    "frozen_calibration.json",
+    "evaluation_metrics.csv",
+    "evaluation_summary.csv",
+    "paired_comparisons.csv",
+    "manifest.json",
+    "RESULTS.md",
+    "report.html"
+  ],
+  "manifest_required": [
+    "plan_sha256",
+    "remote_plan_commit",
+    "remote_calibration_commit",
+    "source_code_sha256",
+    "sql_sha256",
+    "frozen_calibration_sha256",
+    "input_sha256_by_seed",
+    "csv_sha256",
+    "validation_results"
+  ],
+  "acceptance": "Complete validated experiment and truthful report regardless of outcome; no requirement to manufacture superiority, feasibility, deployment, or significance"
+}
