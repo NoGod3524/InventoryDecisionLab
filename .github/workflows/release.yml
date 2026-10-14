@@ -4,7 +4,9 @@ on:
     branches: [main]
     paths:
       - 'VERSION'
-      - '.github/workflows/release.yml'
+concurrency:
+  group: verified-release
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
@@ -33,7 +35,12 @@ jobs:
           VERSION=$(cat VERSION)
           case "$VERSION" in v[0-9]*.[0-9]*.[0-9]*) ;; *) echo 'Invalid version'; exit 1;; esac
           if gh release view "$VERSION" >/dev/null 2>&1; then
-            echo 'Version already exists; refusing to replace it.'
+            PUBLISHED_SHA=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$VERSION" --jq '.object.sha')
+            if [ "$PUBLISHED_SHA" = "$GITHUB_SHA" ]; then
+              echo 'This exact commit is already released; no changes needed.'
+              exit 0
+            fi
+            echo 'Version already exists at a different commit; refusing to replace it.'
             exit 1
           fi
           gh release create "$VERSION" --target "$GITHUB_SHA" --title "InventoryDecisionLab $VERSION" --notes-file docs/release_notes.md
