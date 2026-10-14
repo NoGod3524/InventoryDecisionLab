@@ -17,9 +17,10 @@ jobs:
       - name: Test source and report controls
         run: |
           python3 -m unittest discover -s tests -v
-          python3 -m inventory_lab --skus 20 --days 30 --seeds 7 --output output/ci
+          python3 -m inventory_lab --skus 20 --days 30 --seeds 7,19 --output output/ci
           node tests/report_smoke.js output/ci/report.html
-          node tests/evidence_smoke.js
+          python3 -m inventory_lab.experiments --selection-seeds 2 --evaluation-seeds 2 --days 14 --skus 3 --bootstrap-draws 100 --output output/ci-evidence
+          node tests/evidence_smoke.js output/ci/report.html output/ci-evidence/report.html
           python3 -m compileall -q inventory_lab
   publish:
     needs: verify

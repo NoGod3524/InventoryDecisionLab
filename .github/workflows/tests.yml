@@ -10,10 +10,11 @@ jobs:
       - name: Unit and accounting tests
         run: python3 -m unittest discover -s tests -v
       - name: Smoke experiment
-        run: python3 -m inventory_lab --skus 20 --days 30 --seeds 7 --output output/ci
+        run: python3 -m inventory_lab --skus 20 --days 30 --seeds 7,19 --output output/ci
       - name: Report control and undefined-service checks
         run: |
           node tests/report_smoke.js output/ci/report.html
-          node tests/evidence_smoke.js
+          python3 -m inventory_lab.experiments --selection-seeds 2 --evaluation-seeds 2 --days 14 --skus 3 --bootstrap-draws 100 --output output/ci-evidence
+          node tests/evidence_smoke.js output/ci/report.html output/ci-evidence/report.html
       - name: Public-schema adapter fixture
         run: python3 -m inventory_lab.replay --input tests/fixtures/retail.csv --start-date 2020-01-01 --skus 2 --warmup 28 --days 4 --fixture --output output/fixture
