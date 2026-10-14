@@ -1,0 +1,271 @@
+{
+  "version": "1.0",
+  "selection_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "evaluation_seeds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029
+  ],
+  "scenarios": [
+    {
+      "name": "base",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "budget_low",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 1200000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "budget_high",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 2400000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "lead_long",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 9,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "lead_short",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 1,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "demand_low",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 0.8,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "demand_high",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.2,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "penalty_low",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 300,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "penalty_high",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 7,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 1800,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "review_frequent",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 3,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "review_slow",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 4,
+        "review_days": 14,
+        "daily_budget_cents": 1800000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.0,
+        "service_target": 0.95
+      }
+    },
+    {
+      "name": "joint_stress",
+      "config": {
+        "seed": 7,
+        "skus": 24,
+        "days": 180,
+        "warmup": 56,
+        "lead_days": 9,
+        "review_days": 7,
+        "daily_budget_cents": 1000000,
+        "order_fee_cents": 250,
+        "holding_bps": 5,
+        "shortage_cents": 900,
+        "demand_scale": 1.2,
+        "service_target": 0.95
+      }
+    }
+  ],
+  "selection_rule": "Lowest mean modeled cost meeting 95% fill in at least 90% of selection seeds; freeze before evaluation.",
+  "bootstrap": {
+    "draws": 2000,
+    "seed": 913,
+    "method": "paired percentile bootstrap of mean differences",
+    "level": 0.95
+  },
+  "interpretation": "Conditional uncertainty over synthetic demand seeds only; not uncertainty about real-world assumptions."
+}

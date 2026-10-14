@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inventory Decision Lab · Sales replay</title><style>body{font:16px/1.6 system-ui;color:#17363f;background:#eef3f0;margin:0}main{max-width:1050px;margin:auto;padding:36px 24px}h1{font-size:40px;line-height:1.15}section{background:white;padding:24px;border-radius:12px;margin:22px 0;border:1px solid #d5e3dc}.notice{background:#fff0c0;border-left:5px solid #b88215;padding:18px}table{width:100%;border-collapse:collapse}td,th{padding:13px 8px;border-bottom:1px solid #d5e3dc;text-align:right}td:first-child,th:first-child{text-align:left}.scroll{overflow:auto}pre{white-space:pre-wrap;font-size:12px;max-height:400px;overflow:auto}a{color:#167b73}</style><main><p>INVENTORY DECISION LAB / EXTERNAL DATA CONTRACT</p><h1>Self-authored fixture demonstration</h1><p>2 training-selected SKUs · 28 training days (2020-01-01–2020-01-28) · 4 evaluation days (2020-01-29–2020-02-01) · £18,000 daily purchasing allowance · 4-day lead · 7-day review.</p><p><strong>At least one policy meets the illustrative recorded-sales gate; this is not deployment approval.</strong></p><div class="notice">Recorded sales are not unconstrained demand. This replay tests hypothetical fulfillment of recorded positive sales; it cannot estimate true historical lost sales or realized savings. This page uses invented fixture rows, not actual UCI data.</div><section><h2>Conditional policy comparison</h2><div class="scroll"><table><thead><tr><th>Policy</th><th>Recorded-sales fulfillment</th><th>Modeled cost (GBP)</th><th>Procurement (GBP)</th></tr></thead><tbody><tr><td>fixed_periodic</td><td>100.00%</td><td>£5.10</td><td>£5.59</td></tr><tr><td>rolling_mean</td><td>100.00%</td><td>£5.10</td><td>£5.59</td></tr><tr><td>seasonal_buffer</td><td>100.00%</td><td>£5.10</td><td>£16.46</td></tr></tbody></table></div><p>One historical path is not multiplied into artificial independent seeds. No statistical interval is presented for this deterministic replay.</p></section><section><h2>What is observed vs assumed?</h2><ul><li>Observed input fields: invoices, product codes, timestamps, gross quantities, selling prices, and country.</li><li>Training-only SKU selection and assumed acquisition cost: quantity-weighted training selling price × 0.5. No supplier purchase prices are observed.</li><li>Hypothetical inputs: starting stock, supplier lead time, purchasing allowance, holding charge, order fee, shortage penalty and replenishment policies.</li><li>Cancellations and negative quantities are exported separately, not silently netted into demand.</li><li>Absent product-day records are zero-filled. Closures, missing logs and historical stockouts cannot be distinguished.</li><li>Selection favors high-volume training products; this is not representative of the full catalog.</li></ul></section><section><h2>Provenance and reproducibility</h2><p>Source file SHA-256, exact window, duplicate policy, training-selected SKUs, all parameter assumptions and row counts appear below. Original selected row lineage is exported separately as JSON; customer identifiers are never exported.</p><p><a href="https://archive.ics.uci.edu/dataset/352/online+retail">UCI source and license</a> · <a href="https://doi.org/10.24432/C5BW33">Dataset DOI</a></p><details><summary>Full manifest</summary><pre>{
+  &quot;mode&quot;: &quot;historical_sales_replay&quot;,
+  &quot;source_url&quot;: &quot;https://archive.ics.uci.edu/dataset/352/online+retail&quot;,
+  &quot;source_doi&quot;: &quot;https://doi.org/10.24432/C5BW33&quot;,
+  &quot;source_citation&quot;: &quot;Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository.&quot;,
+  &quot;source_license&quot;: &quot;MIT self-authored test fixture&quot;,
+  &quot;source_sha256&quot;: &quot;2c74d55d088e432bd1519b925a73299b5b79846a2011fce69afaa8178508664a&quot;,
+  &quot;source_filename&quot;: &quot;retail.csv&quot;,
+  &quot;currency&quot;: &quot;GBP&quot;,
+  &quot;money_minor_unit&quot;: &quot;pence (legacy field names end in _cents)&quot;,
+  &quot;country&quot;: &quot;United Kingdom&quot;,
+  &quot;start_date&quot;: &quot;2020-01-01&quot;,
+  &quot;training_end&quot;: &quot;2020-01-28&quot;,
+  &quot;evaluation_start&quot;: &quot;2020-01-29&quot;,
+  &quot;end_date&quot;: &quot;2020-02-01&quot;,
+  &quot;duplicate_policy&quot;: &quot;keep&quot;,
+  &quot;counts&quot;: {
+    &quot;cancellation_rows&quot;: 2,
+    &quot;eligible_sales_rows&quot;: 64,
+    &quot;non_product_code_rows&quot;: 1,
+    &quot;source_rows&quot;: 67
+  },
+  &quot;selected_skus&quot;: [
+    &quot;10001&quot;,
+    &quot;10002&quot;
+  ],
+  &quot;selection&quot;: &quot;Top gross positive units in training only; lexical SKU tie-break&quot;,
+  &quot;acquisition_cost_assumption&quot;: &quot;Training quantity-weighted selling price times cost_ratio; half-up pence; minimum 1p&quot;,
+  &quot;cost_ratio&quot;: &quot;0.5&quot;,
+  &quot;zero_fill&quot;: &quot;All absent SKU/calendar-day sales become zero; closure vs missing vs stockout unknown&quot;,
+  &quot;demand_caveat&quot;: &quot;Recorded sales are not latent demand. Replenishment, cost and lost-sales outcomes are hypothetical.&quot;,
+  &quot;config&quot;: {
+    &quot;seed&quot;: 7,
+    &quot;skus&quot;: 2,
+    &quot;days&quot;: 4,
+    &quot;warmup&quot;: 28,
+    &quot;lead_days&quot;: 4,
+    &quot;review_days&quot;: 7,
+    &quot;daily_budget_cents&quot;: 1800000,
+    &quot;order_fee_cents&quot;: 250,
+    &quot;holding_bps&quot;: 5,
+    &quot;shortage_cents&quot;: 900,
+    &quot;demand_scale&quot;: 1.0,
+    &quot;service_target&quot;: 0.95
+  },
+  &quot;fixture&quot;: true,
+  &quot;interpretation&quot;: &quot;SELF-AUTHORED TEST FIXTURE, not UCI observations&quot;
+}</pre></details></section></main></html>

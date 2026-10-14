@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+output/
+*.sqlite
+.DS_Store
+
+dist/
+data/
+# Local row-level source evidence; the published example is aggregated.
+examples/uci-replay/lineage.json
+examples/uci-replay/adjustments.json
+examples/uci-matched/lineage.json
+examples/uci-matched/adjustments.json

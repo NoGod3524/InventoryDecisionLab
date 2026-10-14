@@ -1,0 +1,18 @@
+{
+  "analysis": "post-hoc data-quality sensitivity, not original preregistered validation",
+  "discovery": "Audit identified gross training invoice 541431, SKU23166, 2011-01-18, quantity74215, priceGBP1.04; cancellation C541433 negates the full quantity on the same day.",
+  "frozen_before_diagnostic_execution": true,
+  "rule": "Pair C-prefixed negative cancellation with one positive sale sharing nonempty CustomerID, country, date, SKU, exact Decimal unit price and exact absolute quantity. FIFO source-row tie-break; use each row once. Do not partially net. Require same calendar day; unmatched rows retained in separate adjustments. Do not export customer IDs.",
+  "scope": "Entire configured input window, followed by full training-only SKU selection, cost proxy, initial stock, daily series and all policy reruns.",
+  "baseline": "Unchanged gross-positive replay",
+  "limitations": "No original-order linkage is provided; exact matches remain a diagnostic hypothesis. Matching cannot recover latent demand or observed inventory. No outcome-based tuning or arbitrary SKU deletion.",
+  "configuration": {
+    "start_date": "2010-12-01",
+    "warmup": 56,
+    "days": 180,
+    "skus": 24,
+    "cost_ratio": "0.5",
+    "country": "United Kingdom",
+    "duplicate_policy": "keep"
+  }
+}

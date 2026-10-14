@@ -1,0 +1,86 @@
+{
+  "selected_policy": null,
+  "rule": "Lowest mean modeled cost meeting 95% fill in at least 90% of selection seeds; freeze before evaluation.",
+  "input_hashes": [
+    {
+      "seed": 100,
+      "input_sha256": "0b53716d5a08d8ac3c427cc2591b558bae0d94285d5ff381548bfbb19c615f43"
+    },
+    {
+      "seed": 101,
+      "input_sha256": "46206ed24799fb4a2728eca8cec5c6c6207574ae826941fb78bd5fa9afbf58b1"
+    },
+    {
+      "seed": 102,
+      "input_sha256": "ca38b48d147962a468007a30ca1c7123a291d9b1c7a9fe7da9bc9546a3e5046b"
+    },
+    {
+      "seed": 103,
+      "input_sha256": "50c602dfaa6a936b20f170ffed3802f9bfc3aedcf66a19c69edba019e6eeb796"
+    },
+    {
+      "seed": 104,
+      "input_sha256": "73ab04b37125dbed26679b50900a8e1f97ea9a8021f9118ec457a1c4c441a032"
+    },
+    {
+      "seed": 105,
+      "input_sha256": "340cbcab97196dc34dfbd9024023f8f8a69c8148e5462266b61ace3d54c5d96f"
+    },
+    {
+      "seed": 106,
+      "input_sha256": "c14a314847d2eb6d1d757d61d9902543f87568983c511388428c582c40a5e8e8"
+    },
+    {
+      "seed": 107,
+      "input_sha256": "3a0ace793769082c3c171c846d4f6796e76a5b75d1378467c93bf2e96f97f504"
+    },
+    {
+      "seed": 108,
+      "input_sha256": "e595760d26dc34bdc0902cdf148fa3448fa03d2eb86b715405a0e0f96164663e"
+    },
+    {
+      "seed": 109,
+      "input_sha256": "b01bf1d18f26d186669011229e245b1dde881193178c57ea6299d75831c50c93"
+    },
+    {
+      "seed": 110,
+      "input_sha256": "2c7f7d2cefdd92cf9ba96512274a9575d7ce96244964e6132c9e2a970152ee80"
+    },
+    {
+      "seed": 111,
+      "input_sha256": "8962c39920e88fd3d1946d95ecb4adea4b4cc45c932b63ce69dfe9a161939b7b"
+    },
+    {
+      "seed": 112,
+      "input_sha256": "7ac1b945161805a871143700c5d93c58bd84fbf99f158452aee2c1ba9d2499ce"
+    },
+    {
+      "seed": 113,
+      "input_sha256": "6eb878783313018ed7aaf1bab7356d200cbe96d63f9c0f9bb87acc1ec9c501db"
+    },
+    {
+      "seed": 114,
+      "input_sha256": "22f3af699562fd92270b02e2b79f246f01044d9993f9e0995289ca0345973c2c"
+    },
+    {
+      "seed": 115,
+      "input_sha256": "64f6e291a5ed779836715c23864ef27af04fbd0566c4bf607a2258fe0dcf00ce"
+    },
+    {
+      "seed": 116,
+      "input_sha256": "8715a46cc5a2585f1ca65f54430a5601fdde3803aec3e1a5e9cb3fb23ca26af7"
+    },
+    {
+      "seed": 117,
+      "input_sha256": "04aad3c664eb6fc9f810d8c9c24a952c092c1a74a30f7a54f9e9c0c11543c83b"
+    },
+    {
+      "seed": 118,
+      "input_sha256": "0615ade631f99399ae286c59872d703e6772407d3b446810d0d467e918e862c9"
+    },
+    {
+      "seed": 119,
+      "input_sha256": "ef38586ef588971f8112ced494fc2896f415e5613710b6c8f1f724c299829668"
+    }
+  ]
+}
