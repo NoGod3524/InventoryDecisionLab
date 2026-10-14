@@ -40,6 +40,46 @@ class Config:
             raise ValueError('Service target must be between zero and one')
 
 
+@dataclass(frozen=True)
+class StrategySpec:
+    """Explicit forecast/buffer specification for versioned ablation experiments.
+
+    Legacy callers need not supply this. A service target is a reporting gate;
+    buffer_multiplier is a heuristic calibrated on separate development seeds.
+    """
+    predictor: str
+    buffer_multiplier: float = 0.0
+
+    def validate(self):
+        if self.predictor not in ('frozen_mean', 'rolling_mean', 'weekday'):
+            raise ValueError('Unknown strategy predictor')
+        if (type(self.buffer_multiplier) not in (int, float)
+                or not math.isfinite(self.buffer_multiplier)
+                or self.buffer_multiplier < 0):
+            raise ValueError('Buffer multiplier must be finite and nonnegative')
+
+
+def strategy_target(history, strategy, protection, frozen_rate):
+    """Tomorrow-forward target; raw-demand sigma is common to all ablation arms."""
+    strategy.validate()
+    recent = history[-28:]
+    mean = statistics.mean(recent)
+    if strategy.predictor == 'frozen_mean':
+        forecast = frozen_rate * protection
+    elif strategy.predictor == 'rolling_mean':
+        forecast = mean * protection
+    else:
+        forecast = 0.0
+        for ahead in range(1, protection + 1):
+            weekday = (len(history) + ahead - 1) % 7
+            matches = [history[i] for i in range(max(0, len(history)-28), len(history))
+                       if i % 7 == weekday]
+            forecast += statistics.mean(matches) if matches else mean
+    buffer = (strategy.buffer_multiplier * statistics.pstdev(recent)
+              * math.sqrt(protection)) if strategy.buffer_multiplier else 0
+    return math.ceil(forecast + buffer)
+
+
 def generate(config):
     """Distinct seeded streams for each SKU; no external/private data."""
     config.validate()
@@ -104,10 +144,17 @@ def estimate(history, policy, protection):
     return math.ceil(total + 1.28 * statistics.pstdev(recent) * math.sqrt(protection))
 
 
-def simulate(config, catalog, demands, policy):
+def simulate(config, catalog, demands, policy, strategy=None):
     validate_data(config, catalog, demands)
-    if policy not in POLICIES:
-        raise ValueError('Unknown policy')
+    if strategy is None:
+        if policy not in POLICIES:
+            raise ValueError('Unknown policy')
+    else:
+        if not isinstance(strategy, StrategySpec):
+            raise ValueError('strategy must be a StrategySpec')
+        strategy.validate()
+        if not isinstance(policy, str) or not policy.strip():
+            raise ValueError('Policy identifier must be a nonempty string')
     histories = {sku: values[:config.warmup] for sku, values in demands.items()}
     rates = {sku: statistics.mean(values) for sku, values in histories.items()}
     on_hand = {row['sku']: math.ceil(rates[row['sku']] * (row['lead_days'] + config.review_days - 1))
@@ -133,7 +180,9 @@ def simulate(config, catalog, demands, policy):
             requested = 0
             if review:
                 protection = lead + config.review_days - 1
-                target = (math.ceil(rates[sku] * protection) if policy == 'fixed_periodic'
+                target = (strategy_target(histories[sku], strategy, protection, rates[sku])
+                          if strategy is not None else
+                          math.ceil(rates[sku] * protection) if policy == 'fixed_periodic'
                           else estimate(histories[sku], policy, protection))
                 requested = max(0, target - position)
                 # Same deterministic scarcity allocator for every policy.
