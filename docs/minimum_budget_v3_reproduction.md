@@ -26,6 +26,22 @@ The `confirm` command requires `--plan`, `--plan-commit`, `--freeze`, `--budget-
 
 Both predeclared fresh 30-path cohorts are evaluated regardless of the first cohort's outcome. The same frozen policy is run at the selected budget and at the original $18,000 allowance on each path. The candidate must pass at least 27/30 in each cohort. Failure is preserved; it cannot trigger unrecorded retuning on those paths.
 
+## Reproduce the completed frozen confirmation directly
+
+The immutable budget/policy freeze is commit `f16b825ece320108359121af563b59264df45c5b`. Its $19,400 seasonal policy passed 29/30 and 27/30 in the two confirmation cohorts. Reproduce those already-observed results without publishing anything or making a new selection:
+
+```sh
+python -m inventory_lab.budget_search confirm \
+  --plan docs/minimum_budget_plan_v3.json \
+  --plan-commit e0428a808e52bcdd9827e0ebea9653b39ef2b428 \
+  --freeze examples/minimum-budget-v3-development/frozen_budget_selection.json \
+  --budget-freeze-commit f16b825ece320108359121af563b59264df45c5b \
+  --output output/minimum-budget-v3-reproduced \
+  --workers 4
+```
+
+Compare the generated CSV, manifest and report bytes against `examples/minimum-budget-v3/`. A rerun is deterministic reproduction of the same evidence, not another independent validation. No original v2 calculation source or artifact was changed to obtain these results.
+
 ## Artifacts
 
 - `development_metrics.csv`: every visited budget × both policies × all 90 development paths.

@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "rows": 2700,
+  "complete_budgets": 15,
+  "first_qualifying_budget_cents": 1940000,
+  "selected_policy": "seasonal_base_stock_z329",
+  "selected_mean_cost": 6029.3879191666665,
+  "all_lower_budgets_fail_at_least_one_cohort": true,
+  "original_budget_metrics_exactly_match_all_180_v2_policy_paths": true,
+  "demand_and_initial_endowment_constant_across_budgets": true,
+  "source_and_csv_hashes_verified": true
+}

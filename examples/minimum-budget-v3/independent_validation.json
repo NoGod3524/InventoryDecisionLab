@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "policy_seed_rows": 120,
+  "confirmation_cohort_pass_counts": {
+    "confirmation_A": 29,
+    "confirmation_B": 27
+  },
+  "empirical_confirmation_gate_passed": true,
+  "checks": {
+    "all_source_plan_freeze_csv_hashes": true,
+    "original_and_selected_budget_same_policy_demand_endowment": true,
+    "summary_means_pass_counts_wilson": true,
+    "four_independent_paired_bootstraps": true,
+    "changed_budget_labels": true
+  }
+}
