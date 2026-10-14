@@ -13,7 +13,7 @@ jobs:
         run: python3 -m inventory_lab --skus 20 --days 30 --seeds 7 --output output/ci
       - name: Report control and undefined-service checks
         run: |
-          node tests/report_smoke.js
+          node tests/report_smoke.js output/ci/report.html
           node tests/evidence_smoke.js
       - name: Public-schema adapter fixture
         run: python3 -m inventory_lab.replay --input tests/fixtures/retail.csv --start-date 2020-01-01 --skus 2 --warmup 28 --days 4 --fixture --output output/fixture

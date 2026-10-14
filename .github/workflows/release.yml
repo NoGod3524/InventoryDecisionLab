@@ -17,7 +17,8 @@ jobs:
       - name: Test source and report controls
         run: |
           python3 -m unittest discover -s tests -v
-          node tests/report_smoke.js
+          python3 -m inventory_lab --skus 20 --days 30 --seeds 7 --output output/ci
+          node tests/report_smoke.js output/ci/report.html
           node tests/evidence_smoke.js
           python3 -m compileall -q inventory_lab
   publish:
@@ -30,17 +31,4 @@ jobs:
       - name: Publish immutable version reference
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          set -eu
-          VERSION=$(cat VERSION)
-          case "$VERSION" in v[0-9]*.[0-9]*.[0-9]*) ;; *) echo 'Invalid version'; exit 1;; esac
-          if gh release view "$VERSION" >/dev/null 2>&1; then
-            PUBLISHED_SHA=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$VERSION" --jq '.object.sha')
-            if [ "$PUBLISHED_SHA" = "$GITHUB_SHA" ]; then
-              echo 'This exact commit is already released; no changes needed.'
-              exit 0
-            fi
-            echo 'Version already exists at a different commit; refusing to replace it.'
-            exit 1
-          fi
-          gh release create "$VERSION" --target "$GITHUB_SHA" --title "InventoryDecisionLab $VERSION" --notes-file docs/release_notes.md
+        run: python3 scripts/publish_release.py
