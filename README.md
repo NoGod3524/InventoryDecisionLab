@@ -8,6 +8,17 @@ Compare transparent replenishment rules across the **same demand paths**: the pr
 
 **All published results are simulated. This is an auditable business-analytics research project, not a production ordering system or evidence of real retailer savings.**
 
+## v3: the minimum qualifying budget in the declared study
+
+The [v3 report](examples/minimum-budget-v3/report.html) and [results](examples/minimum-budget-v3/RESULTS.md) reach the prespecified simulation criterion with an explicitly higher purchasing allowance:
+
+- **$19,400 per review day**, up **7.78%** from $18,000, is the first qualifying $100-grid budget among the two fixed z=3.29 policy specifications. All 15 lower-or-equal grid levels were fully tested on the same 90 previously observed development paths. This is a grid-and-policy-class minimum, not a global minimum budget.
+- The selected seasonal policy passed **27/30, 30/30 and 28/30** in the three development cohorts. The plan and resulting budget/policy choice were published separately before fresh confirmation.
+- Two new, predeclared confirmation cohorts passed **29/30 and 27/30**, meeting the required 27/30 in each. The same policy at the original $18,000 budget passed only **24/30 and 22/30** on those same new paths.
+- Across the 60 paired confirmation paths, mean fill rose **1.751 percentage points**. Mean procurement rose **$10,252.92** over the 180-day horizon and mean inventory capital rose **$1,173.07**. The gain is a changed-budget effect, not an algorithm improvement under the old constraint or a real-world savings claim.
+
+Read the [frozen protocol](docs/minimum_budget_plan_v3.md), [full searched grid](examples/minimum-budget-v3/DEVELOPMENT.md), and [exact reproduction commands](docs/minimum_budget_v3_reproduction.md). The empirical criterion is met; production deployment and a true population service guarantee are not established. All v1/v2 failures and the original-capacity certificate below remain intact.
+
 ## v2: strong baselines and component ablation
 
 The new [v2 results](examples/ablation-v2/RESULTS.md) and [offline report](examples/ablation-v2/report.html) separate the weekday forecast from its safety buffer using a 2×2 design, and give rolling and weekday policies the same development calibration opportunity. The [plan](ablation_plan_v2.json) and [calibration](examples/ablation-v2-development/frozen_calibration.json) were separately committed before evaluating 60 new seeds. All v1 evidence below is preserved.

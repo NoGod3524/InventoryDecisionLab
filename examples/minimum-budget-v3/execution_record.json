@@ -1,0 +1,25 @@
+{
+  "remote_plan_commit": "e0428a808e52bcdd9827e0ebea9653b39ef2b428",
+  "remote_budget_freeze_commit": "f16b825ece320108359121af563b59264df45c5b",
+  "remote_budget_freeze_timestamp_utc": "2026-10-14T03:40:33Z",
+  "remote_verification": "Ten frozen source, test, documentation, license and development files read back with no byte differences before confirmation authorization.",
+  "first_confirmation_invocation_observed_utc_window": [
+    "2026-10-14T03:41:04Z",
+    "2026-10-14T03:41:14Z"
+  ],
+  "first_confirmation_completion_observed_utc": "2026-10-14T03:41:29Z",
+  "timestamp_scope": "Execution-session observation times, not inferred from filesystem modification times; invocation is bounded rather than claimed as an exact process start.",
+  "selected_budget_cents": 1940000,
+  "original_budget_cents": 1800000,
+  "selected_policy": "seasonal_base_stock_z329",
+  "confirmation_cohort_pass_counts": {
+    "confirmation_A": 29,
+    "confirmation_B": 27
+  },
+  "original_budget_cohort_pass_counts": {
+    "confirmation_A": 24,
+    "confirmation_B": 22
+  },
+  "post_confirmation_model_budget_or_selection_changes": false,
+  "cumulative_evidence": "Preserve prior v1/v2 failures. All 90 v2 paths were disclosed development history for this extension. Fresh confirmation uses the two separately declared 30-path cohorts."
+}

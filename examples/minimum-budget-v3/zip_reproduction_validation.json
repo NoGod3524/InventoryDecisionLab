@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "canonical_plan_packaged": true,
+  "byte_identical_outputs": [
+    "DEVELOPMENT.md",
+    "RESULTS.md",
+    "confirmation_metrics.csv",
+    "confirmation_summary.csv",
+    "development_metrics.csv",
+    "development_summary.csv",
+    "frozen_budget_selection.json",
+    "manifest.json",
+    "minimum_budget_plan_v3.json",
+    "paired_comparisons.csv",
+    "report.html"
+  ],
+  "comparison_count": 11,
+  "tested_archive_sha256": "428eff72dae559672c8b93b4096eadaa9f03eca6b97eea58177be4d127776e8b",
+  "archive_scope": "Archive built before this validation record was added; its calculation sources and all reproduced outputs are unchanged.",
+  "interpretation": "Deterministic reproduction of already-observed confirmation paths, not a new independent validation."
+}
